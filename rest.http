@@ -1,0 +1,40 @@
+###GET 
+GET http://localhost:8080/api/v1/candidate 
+Content-Type: application/json
+
+###POST 
+POST http://localhost:8080/api/v1/candidate
+Content-Type: application/json
+
+{
+    "firstName": "Minh", 
+    "lastName": "Nguyen", 
+    "email": "minhnnguyen29@gmail.com", 
+    "dob": "1997-10-01"
+}
+###
+
+POST http://localhost:8080/api/v1/candidate
+Content-Type: application/json
+
+{
+    "firstName": "Anita Mariam Jolly", 
+    "lastName": "", 
+    "email": "anita.jolly@gmail.com", 
+    "dob": "1993-06-26"
+}
+
+###DELETE 
+DELETE http://localhost:8080/api/v1/candidate/1
+
+###PUT with all params 
+PUT http://localhost:8080/api/v1/candidate/1?firstName=Angela&email=angela.aion@gmail.com
+Content-Type: application/json
+
+###PuT with 1 param 
+PUT http://localhost:8080/api/v1/candidate/2?email=ben.brook1@gmail.com
+Content-Type: application/json
+
+###PUT with 1 param 
+PUT http://localhost:8080/api/v1/candidate/1?firstName=Amber
+Content-Type: application/json

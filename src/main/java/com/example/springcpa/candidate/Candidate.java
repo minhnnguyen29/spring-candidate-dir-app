@@ -1,12 +1,17 @@
 package com.example.springcpa.candidate;
 
-import net.bytebuddy.asm.Advice;
-
 import javax.persistence.*;
 import java.time.*;
 
 @Entity
-@Table
+//create table named "candidate" with constraint: column "email" is unique 
+@Table(
+    name = "Candidate",
+    uniqueConstraints = @UniqueConstraint(
+        name = "c_email_unique", 
+        columnNames = "email"
+    )
+)//this will be mapped to table "candidate"
 public class Candidate {
     @Id
     @SequenceGenerator(
@@ -18,40 +23,80 @@ public class Candidate {
             strategy = GenerationType.SEQUENCE,
             generator = "candidate_sequence"
     )
+    @Column(
+        name = "id",
+        updatable = false
+    )
     private Long id;
+    
+    @Column(
+        name = "first_name", 
+        nullable = false, 
+        columnDefinition = "TEXT"
+    )
     private String firstName;
-    private String lastName;
+    
+    @Column(
+        name = "last_name", 
+        nullable = false, 
+        columnDefinition = "TEXT"
+    )private String lastName;
+    
+    @Column(
+        name = "email", 
+        nullable = false, 
+        columnDefinition = "TEXT" 
+    )
     private String email;
+    
+    @Column(
+        name = "password", 
+        nullable = false, 
+        columnDefinition = "TEXT"
+    )
+    private String password; 
+    
+    @Column(
+        name = "dob", 
+        nullable = false, 
+        columnDefinition = "DATE"
+    )
     private LocalDate dob;
+
+    @Column(
+        name = "education", 
+        columnDefinition =  "TEXT"
+    )
+    private String education; 
+    
+    @Column(
+        name = "cover_letter", 
+        columnDefinition = "TEXT"
+    )
+    private String coverLetter; 
+    
     @Transient
     private Integer age;
 
     //Constructors
-    public Candidate() {
+    public Candidate() {//no-arg
     }
 
     public Candidate(String firstName,
                      String lastName,
-                     String email,
-                     LocalDate dob) {
+                     String email, 
+                     String password,
+                     LocalDate dob, 
+                     String education, 
+                     String coverLetter) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+        this.password = password; 
         this.dob = dob;
+        this.education = education; 
+        this.coverLetter = coverLetter;
     }
-
-    public Candidate(Long id,
-                     String firstName,
-                     String lastName,
-                     String email,
-                     LocalDate dob) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.dob = dob;
-    }
-
 
     //Getters & Setters
     public Long getId() {
@@ -86,12 +131,36 @@ public class Candidate {
         this.email = email;
     }
 
+    public String getPassword(){
+        return password; 
+    }
+
+    public void setPassword(String password){
+        this.password = password;
+    }
+
     public LocalDate getDob() {
         return dob;
     }
 
     public void setDob(LocalDate dob) {
         this.dob = dob;
+    }
+
+    public String getEducation(){
+        return education; 
+    }
+
+    public void setEducation(String education){
+        this.education = education; 
+    }
+
+    public String getCoverLetter(){
+        return coverLetter; 
+    }
+
+    public void setCoverLetter(String coverLetter){
+        this.coverLetter = coverLetter; 
     }
 
     public Integer getAge() {
