@@ -1,4 +1,4 @@
-insert into Candidate (id, first_name, last_name, email, password, dob , education, cover_letter) values (1, 'Meggy', 'Slatter', 'mslatter0@icio.us', 'RvsWEd6', '1970-01-24', 'Universidad Isaac Newton', null);
+insert into Candidate (id, first_name, last_name, email, password, dob , education, cover_letter) values (1, 'Minh', 'Nguyen', 'minhnnguyen29@gmail.com', 'RvsWEd6', '1997-10-01', 'University of Wollongong', 'minhresume.pdf');
 insert into Candidate (id, first_name, last_name, email, password, dob , education, cover_letter) values (2, 'Damara', 'Standbrook', 'dstandbrook1@nhs.uk', 'fgtGpD7m2', '1998-09-08', 'Musashino Women''s University', 'HacHabitassePlatea.jpeg');
 insert into Candidate (id, first_name, last_name, email, password, dob , education, cover_letter) values (3, 'Benji', 'Cantle', 'bcantle2@themeforest.net', 'ZAIewBIbE', '1985-09-08', 'Technische Universität Ilmenau', null);
 insert into Candidate (id, first_name, last_name, email, password, dob , education, cover_letter) values (4, 'Wayland', 'Mantz', 'wmantz3@about.me', 'c5Mv0KIu', '1998-07-01', 'Université de Tunis El Manar', 'Justo.ppt');

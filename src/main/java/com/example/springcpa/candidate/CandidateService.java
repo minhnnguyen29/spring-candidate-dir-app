@@ -2,9 +2,7 @@ package com.example.springcpa.candidate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 
-import java.time.*;
 import java.util.*;
 
 import javax.transaction.Transactional;
@@ -15,18 +13,36 @@ public class CandidateService {
 
     private final CandidateRepository candidateRepository;
 
-    @Autowired
+    @Autowired 
     public CandidateService(CandidateRepository candidateRepository){
         this.candidateRepository = candidateRepository;
     }
+
+    //GET 
+    //all candidates 
     public List<Candidate> getCandidates(){
-        return candidateRepository.findAll();
+        return (List<Candidate>) candidateRepository.findAll();
+    }
+    //candidates who are disqualified
+    public List<Candidate> getCandidatesWithoutCoverLetter(){
+        return (List<Candidate>) candidateRepository.findByCoverLetter(); 
+    }
+    //candidate with Id
+    public Optional<Candidate> getCandidateWithId(Long candidateId){
+        Optional<Candidate> candidateOptionalId = candidateRepository.findById(candidateId);
+        if (!candidateOptionalId.isPresent())
+        {
+            throw new IllegalStateException("Candidate with id " + candidateId+ " does not exist.");
+        }
+        return candidateOptionalId;
     }
 
+    //POST
     public void addNewCandidate(Candidate candidate){
         Optional<Candidate> candidateEmailOptional = candidateRepository
                 .findCandidateByEmail(candidate.getEmail());
-        if (candidateEmailOptional.isPresent()){
+        if (candidateEmailOptional.isPresent())
+        {
             throw new IllegalStateException("email taken");
         }
         candidateRepository.save(candidate);
@@ -41,9 +57,6 @@ public class CandidateService {
 //        candidateRepository.save(candidate);
     }
 
-    public void registerCandidates(List<Candidate> candidates){
-        candidateRepository.saveAll(candidates);
-    }
 
     //Delete Candidate Logic 
     public void deleteCandidate(Long candidateId){

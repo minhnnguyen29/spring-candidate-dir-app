@@ -171,4 +171,13 @@ public class Candidate {
     public void setAge(Integer age) {
         this.age = age;
     }
+
+    public void printCandidate(){
+        System.out.println();
+        System.out.println("Name: " + firstName + " " + lastName); 
+        System.out.println("Date of Birth: " + dob.toString());
+        System.out.println("Email: " + email); 
+        System.out.println("Education: " + education); 
+        System.out.println("Cover Letter: " + (coverLetter == null ? "No" : "Yes"));
+    }
 }

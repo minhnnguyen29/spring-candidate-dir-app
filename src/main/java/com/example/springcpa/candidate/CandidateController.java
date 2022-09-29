@@ -2,9 +2,6 @@ package com.example.springcpa.candidate;
 
 import java.util.*;
 
-import javax.websocket.server.PathParam;
-
-import org.aspectj.apache.bcel.classfile.Module.Require;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(path = "api/v1/candidate")//enter this path in the url to request from end point
 public class CandidateController {
 
-    private static final String REQUEST_BODY_NULL = "Request does not contain a body. Action can not be done.";
     private final CandidateService candidateService;//access to Service Layer so logics can be performed in API
 
 
@@ -22,9 +18,22 @@ public class CandidateController {
     }
 
     //endpoint
-    @GetMapping
+    @GetMapping(path = "all")
     public List<Candidate> getCandidates(){
-        return candidateService.getCandidates();
+        return (List<Candidate>) candidateService.getCandidates();
+    }
+
+    @GetMapping(path = "disqualified")
+    public List<Candidate> getCandidatesWithoutCoverLetter(){
+        return (List<Candidate>) candidateService.getCandidatesWithoutCoverLetter();
+    }
+
+    //map user with certain id 
+    @GetMapping(path = "{candidateId}")
+    public Optional<Candidate> getCandidateWithId(@PathVariable("candidateId") Long candidateId){
+        candidateService.getCandidateWithId(candidateId)
+                .ifPresent(candidate -> candidate.printCandidate());;
+        return candidateService.getCandidateWithId(candidateId);
     }
 
 
